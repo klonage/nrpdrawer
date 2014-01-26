@@ -1,0 +1,6 @@
+﻿namespace NrpDrawer
+{
+    class DbItem
+    {
+    }
+}
