@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Globalization;
-using System.Windows.Forms;
 
 namespace NrpDrawer
 {
@@ -91,6 +90,21 @@ namespace NrpDrawer
             if (cmd.ExecuteNonQuery() != 1)
             {
                 throw new Exception("Cannot " + (update ? "update" : "insert") + " value");
+            }
+        }
+
+        public void RemoveValue(DateTime date)
+        {
+            var cmd = new OleDbCommand
+            {
+                Connection = connection,
+                CommandType = CommandType.Text,
+                CommandText = "delete from main_table where insert_date = #" + date.ToShortDateString() + "#"
+            };
+
+            if (cmd.ExecuteNonQuery() != 1)
+            {
+                throw new Exception("Cannot remove item");
             }
         }
     }

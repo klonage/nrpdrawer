@@ -23,20 +23,18 @@ namespace NrpDrawer
 
         private void openDatabaseFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dbOpenFileDialog.ShowDialog() == DialogResult.OK)
+            if (dbOpenFileDialog.ShowDialog() != DialogResult.OK) return;
+            try
             {
-                try
-                {
-                    controller.Disconnect();
-                    controller.Connect(dbOpenFileDialog.FileName);
-                    dbLoaded = true;
-                    ReloadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    dbLoaded = false;
-                }
+                controller.Disconnect();
+                controller.Connect(dbOpenFileDialog.FileName);
+                dbLoaded = true;
+                ReloadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                dbLoaded = false;
             }
         }
 
@@ -56,15 +54,24 @@ namespace NrpDrawer
             var s = new Series {ChartType = SeriesChartType.Line, Color = Color.DarkRed};
             DateTime b = beginDateTimePicker.Value,
                 e = endDateTimePicker.Value;
-            foreach (var v in controller.GetFromRangeOfDate(
-                new DateTime(b.Year, b.Month, b.Day), new DateTime(e.Year, e.Month, e.Day)))
-            {
-                s.Points.AddXY(v.Date, v.Temperature);
-            }
 
-            mainChart.Series.Clear();
-            mainChart.Series.Add(s);
-            CalculateScale();
+            try
+            {
+                ReloadData();
+
+                foreach (var v in controller.GetFromRangeOfDate(
+                    new DateTime(b.Year, b.Month, b.Day), new DateTime(e.Year, e.Month, e.Day)))
+                {
+                    s.Points.AddXY(v.Date, v.Temperature);
+                }
+                mainChart.Series.Clear();
+                mainChart.Series.Add(s);
+                CalculateScale();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Cannot reload data: " + ex.Message);
+            }
         }
 
         private void mainChart_SizeChanged(object sender, EventArgs e)
@@ -103,9 +110,17 @@ namespace NrpDrawer
 
         private void updateTemperature_Click(object sender, EventArgs e)
         {
-            // todo replace??? you should use localle settings
-            controller.InsertValue(Double.Parse(temperatureTextBox.Text.Replace('.', ',')), currentDateTimePicker.Value);
-            ReloadData();
+            try
+            {
+                // todo replace??? you should use localle settings
+                controller.InsertValue(Double.Parse(temperatureTextBox.Text.Replace('.', ',')),
+                    currentDateTimePicker.Value);
+                ReloadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Cannot update/insert value: " + ex.Message);
+            }
         }
 
         private void currentDateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -128,6 +143,13 @@ namespace NrpDrawer
             {
                 temperatureTextBox.Text = String.Empty;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            controller.RemoveValue(currentDateTimePicker.Value);
+            ReloadData();
+            temperatureTextBox.Text = string.Empty;
         }
     }
 }

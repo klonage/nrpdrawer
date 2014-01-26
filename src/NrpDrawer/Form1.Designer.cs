@@ -39,20 +39,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.mainChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.beginDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.temperatureLabel = new System.Windows.Forms.Label();
             this.temperatureTextBox = new System.Windows.Forms.TextBox();
             this.updateTemperature = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -84,7 +85,7 @@
             // 
             this.currentDateTimePicker.Location = new System.Drawing.Point(45, 16);
             this.currentDateTimePicker.Name = "currentDateTimePicker";
-            this.currentDateTimePicker.Size = new System.Drawing.Size(152, 20);
+            this.currentDateTimePicker.Size = new System.Drawing.Size(213, 20);
             this.currentDateTimePicker.TabIndex = 1;
             this.currentDateTimePicker.ValueChanged += new System.EventHandler(this.currentDateTimePicker_ValueChanged);
             // 
@@ -134,13 +135,36 @@
             this.panel1.Size = new System.Drawing.Size(860, 82);
             this.panel1.TabIndex = 5;
             // 
-            // endDateTimePicker
+            // groupBox2
             // 
-            this.endDateTimePicker.Location = new System.Drawing.Point(45, 42);
-            this.endDateTimePicker.Name = "endDateTimePicker";
-            this.endDateTimePicker.Size = new System.Drawing.Size(130, 20);
-            this.endDateTimePicker.TabIndex = 5;
-            this.endDateTimePicker.ValueChanged += new System.EventHandler(this.beginDateTimePicker_ValueChanged);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.beginDateTimePicker);
+            this.groupBox2.Controls.Add(this.endDateTimePicker);
+            this.groupBox2.Location = new System.Drawing.Point(273, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(185, 76);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Show Data Range";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "To:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "From:";
             // 
             // beginDateTimePicker
             // 
@@ -149,6 +173,29 @@
             this.beginDateTimePicker.Size = new System.Drawing.Size(130, 20);
             this.beginDateTimePicker.TabIndex = 4;
             this.beginDateTimePicker.ValueChanged += new System.EventHandler(this.beginDateTimePicker_ValueChanged);
+            // 
+            // endDateTimePicker
+            // 
+            this.endDateTimePicker.Location = new System.Drawing.Point(45, 42);
+            this.endDateTimePicker.Name = "endDateTimePicker";
+            this.endDateTimePicker.Size = new System.Drawing.Size(130, 20);
+            this.endDateTimePicker.TabIndex = 5;
+            this.endDateTimePicker.ValueChanged += new System.EventHandler(this.beginDateTimePicker_ValueChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.temperatureLabel);
+            this.groupBox1.Controls.Add(this.temperatureTextBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.updateTemperature);
+            this.groupBox1.Controls.Add(this.currentDateTimePicker);
+            this.groupBox1.Location = new System.Drawing.Point(3, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(264, 76);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Current item";
             // 
             // temperatureLabel
             // 
@@ -170,56 +217,21 @@
             // 
             this.updateTemperature.Location = new System.Drawing.Point(122, 40);
             this.updateTemperature.Name = "updateTemperature";
-            this.updateTemperature.Size = new System.Drawing.Size(75, 23);
+            this.updateTemperature.Size = new System.Drawing.Size(73, 23);
             this.updateTemperature.TabIndex = 8;
             this.updateTemperature.Text = "Set/Update";
             this.updateTemperature.UseVisualStyleBackColor = true;
             this.updateTemperature.Click += new System.EventHandler(this.updateTemperature_Click);
             // 
-            // groupBox1
+            // button1
             // 
-            this.groupBox1.Controls.Add(this.temperatureLabel);
-            this.groupBox1.Controls.Add(this.temperatureTextBox);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.updateTemperature);
-            this.groupBox1.Controls.Add(this.currentDateTimePicker);
-            this.groupBox1.Location = new System.Drawing.Point(3, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 76);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Current item";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.beginDateTimePicker);
-            this.groupBox2.Controls.Add(this.endDateTimePicker);
-            this.groupBox2.Location = new System.Drawing.Point(216, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(185, 76);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Show Data Range";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "From:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "To:";
+            this.button1.Location = new System.Drawing.Point(201, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Remove";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -236,10 +248,10 @@
             this.mainMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,6 +276,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
