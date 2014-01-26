@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,12 +57,16 @@
             this.temperatureLabel = new System.Windows.Forms.Label();
             this.temperatureTextBox = new System.Windows.Forms.TextBox();
             this.mucusChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dateToolStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mucusChart)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -109,30 +113,33 @@
             // 
             // mainChart
             // 
-            chartArea1.AxisX.Interval = 1D;
-            chartArea1.AxisX.IntervalOffset = 1D;
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
-            chartArea1.AxisX.LabelStyle.Format = "yyyy-MM-dd";
-            chartArea1.AxisX.Title = "Date";
-            chartArea1.AxisY.Interval = 0.5D;
-            chartArea1.AxisY.Maximum = 44D;
-            chartArea1.AxisY.Minimum = 34D;
-            chartArea1.Name = "ChartArea1";
-            this.mainChart.ChartAreas.Add(chartArea1);
+            chartArea3.AxisX.Interval = 1D;
+            chartArea3.AxisX.IntervalOffset = 1D;
+            chartArea3.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea3.AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chartArea3.AxisX.Title = "Date";
+            chartArea3.AxisY.Interval = 0.5D;
+            chartArea3.AxisY.Maximum = 44D;
+            chartArea3.AxisY.Minimum = 34D;
+            chartArea3.Name = "ChartArea1";
+            this.mainChart.ChartAreas.Add(chartArea3);
             this.mainChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.mainChart.Legends.Add(legend1);
+            legend3.Name = "Legend1";
+            this.mainChart.Legends.Add(legend3);
             this.mainChart.Location = new System.Drawing.Point(0, 241);
             this.mainChart.Name = "mainChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.mainChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.mainChart.Series.Add(series3);
             this.mainChart.Size = new System.Drawing.Size(860, 200);
             this.mainChart.TabIndex = 4;
             this.mainChart.Text = "chart1";
             this.mainChart.SizeChanged += new System.EventHandler(this.mainChart_SizeChanged);
+            this.mainChart.Paint += new System.Windows.Forms.PaintEventHandler(this.mainChart_Paint);
             this.mainChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mainChart_MouseClick);
+            this.mainChart.MouseLeave += new System.EventHandler(this.mainChart_MouseLeave);
+            this.mainChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainChart_MouseMove);
             // 
             // panel1
             // 
@@ -305,34 +312,61 @@
             // 
             // mucusChart
             // 
-            chartArea2.AxisX.Interval = 1D;
-            chartArea2.AxisX.IntervalOffset = 1D;
-            chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
-            chartArea2.AxisX.LabelStyle.Format = "yyyy-MM-dd";
-            chartArea2.AxisX.Title = "Date";
-            chartArea2.AxisY.Interval = 1D;
-            chartArea2.AxisY.Maximum = 2D;
-            chartArea2.AxisY.Minimum = 0D;
-            chartArea2.Name = "ChartArea1";
-            this.mucusChart.ChartAreas.Add(chartArea2);
+            chartArea4.AxisX.Interval = 1D;
+            chartArea4.AxisX.IntervalOffset = 1D;
+            chartArea4.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea4.AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chartArea4.AxisX.Title = "Date";
+            chartArea4.AxisY.Interval = 1D;
+            chartArea4.AxisY.Maximum = 2D;
+            chartArea4.AxisY.Minimum = 0D;
+            chartArea4.Name = "ChartArea1";
+            this.mucusChart.ChartAreas.Add(chartArea4);
             this.mucusChart.Dock = System.Windows.Forms.DockStyle.Top;
-            legend2.Name = "Legend1";
-            this.mucusChart.Legends.Add(legend2);
+            legend4.Name = "Legend1";
+            this.mucusChart.Legends.Add(legend4);
             this.mucusChart.Location = new System.Drawing.Point(0, 106);
             this.mucusChart.Name = "mucusChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.mucusChart.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.mucusChart.Series.Add(series4);
             this.mucusChart.Size = new System.Drawing.Size(860, 135);
             this.mucusChart.TabIndex = 6;
             this.mucusChart.Text = "chart1";
+            this.mucusChart.Paint += new System.Windows.Forms.PaintEventHandler(this.mucusChart_Paint);
+            this.mucusChart.MouseLeave += new System.EventHandler(this.mucusChart_MouseLeave);
+            this.mucusChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mucusChart_MouseMove);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.dateToolStripLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 419);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(860, 22);
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(37, 17);
+            this.toolStripStatusLabel1.Text = "Date: ";
+            // 
+            // dateToolStripLabel
+            // 
+            this.dateToolStripLabel.Name = "dateToolStripLabel";
+            this.dateToolStripLabel.Size = new System.Drawing.Size(63, 17);
+            this.dateToolStripLabel.Text = "0000-00-00";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 441);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mainChart);
             this.Controls.Add(this.mucusChart);
             this.Controls.Add(this.panel1);
@@ -349,6 +383,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mucusChart)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,6 +415,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox mucusTypeComboBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart mucusChart;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel dateToolStripLabel;
     }
 }
 

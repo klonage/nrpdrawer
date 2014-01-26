@@ -14,7 +14,9 @@ namespace NrpDrawer
         private bool transaction;
         private readonly string[] observationMapper = {"Ø", "su", "c", "w", "wl"};
         private readonly string[] mucusMapper = {"b", "ż", "żt", "gr", "m", "kl", "S", "Bj", "szk", "pł", "mś"};
-         
+        private Point mainChartMouseLoc = Point.Empty;
+        private Point mucusChartMouseLoc = Point.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -105,20 +107,25 @@ namespace NrpDrawer
             mainChart.ChartAreas[0].AxisY.Interval = val;
         }
 
+        private DateTime GetDateTimeFromPosition(Point pos, Chart chart)
+        {
+            var results = chart.HitTest(pos.X, pos.Y, false,
+                                         ChartElementType.PlottingArea);
+            foreach (var xVal in from result in results
+                                 where result.ChartElementType == ChartElementType.PlottingArea
+                                 select result.ChartArea.AxisX.PixelPositionToValue(pos.X))
+            {
+                return DateTime.FromOADate(xVal);
+            }
+
+            return DateTime.Now;
+        }
+
         private void mainChart_MouseClick(object sender, MouseEventArgs e)
         {
-            var pos = e.Location;
-            var results = mainChart.HitTest(pos.X, pos.Y, false,
-                                         ChartElementType.PlottingArea);
             transaction = true;
-            foreach (var xVal in from result in results
-                where result.ChartElementType == ChartElementType.PlottingArea
-                select result.ChartArea.AxisX.PixelPositionToValue(pos.X))
-            {
-                currentDateTimePicker.Value = DateTime.FromOADate(xVal);
-                SetCurrentValue();
-                break;
-            }
+            currentDateTimePicker.Value = GetDateTimeFromPosition(e.Location, mainChart);
+            SetCurrentValue();
             transaction = false;
         }
 
@@ -171,6 +178,66 @@ namespace NrpDrawer
         private void baseSymbolsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             mucusTypeComboBox.Enabled = baseSymbolsComboBox.SelectedIndex != 0;
+        }
+
+        private void mainChart_MouseMove(object sender, MouseEventArgs e)
+        {
+            mainChartMouseLoc = e.Location;
+            mainChart.Refresh();
+            mucusChart.Refresh();
+            dateToolStripLabel.Text = GetDateTimeFromPosition(e.Location, mainChart).ToShortDateString();
+        }
+
+        private void mainChart_Paint(object sender, PaintEventArgs e)
+        {
+            if (mainChartMouseLoc != Point.Empty)
+            {
+                e.Graphics.DrawLine(new Pen(Color.Red), new Point(0, mainChartMouseLoc.Y),
+                    new Point(mainChart.Width, mainChartMouseLoc.Y));
+                e.Graphics.DrawLine(new Pen(Color.Red), new Point(mainChartMouseLoc.X, 0),
+                    new Point(mainChartMouseLoc.X, mainChart.Height));
+            }
+            else if (mucusChartMouseLoc != Point.Empty)
+            {
+                e.Graphics.DrawLine(new Pen(Color.Red), new Point(mucusChartMouseLoc.X, 0),
+                    new Point(mucusChartMouseLoc.X, mainChart.Height));
+            }
+        }
+
+        private void mucusChart_Paint(object sender, PaintEventArgs e)
+        {
+            if (mainChartMouseLoc != Point.Empty)
+            {
+                e.Graphics.DrawLine(new Pen(Color.Red), new Point(mainChartMouseLoc.X, 0), new Point(mainChartMouseLoc.X, mucusChart.Height));
+            }
+            else if (mucusChartMouseLoc != Point.Empty)
+            {
+                e.Graphics.DrawLine(new Pen(Color.Red), new Point(0, mucusChartMouseLoc.Y),
+                    new Point(mucusChart.Width, mucusChartMouseLoc.Y));
+                e.Graphics.DrawLine(new Pen(Color.Red), new Point(mucusChartMouseLoc.X, 0),
+                    new Point(mucusChartMouseLoc.X, mucusChart.Height));
+            }
+            
+        }
+
+        private void mucusChart_MouseMove(object sender, MouseEventArgs e)
+        {
+            mucusChartMouseLoc = e.Location;
+            mainChart.Refresh();
+            mucusChart.Refresh();
+            dateToolStripLabel.Text = GetDateTimeFromPosition(e.Location, mucusChart).ToShortDateString();
+        }
+
+        private void mucusChart_MouseLeave(object sender, EventArgs e)
+        {
+            mucusChartMouseLoc = Point.Empty;
+            Refresh();
+        }
+
+        private void mainChart_MouseLeave(object sender, EventArgs e)
+        {
+            mainChartMouseLoc = Point.Empty;
+            Refresh();
         }
     }
 }
