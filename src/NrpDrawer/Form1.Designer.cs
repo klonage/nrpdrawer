@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend15 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea16 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend16 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +60,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateToolStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.panel1.SuspendLayout();
@@ -113,25 +119,25 @@
             // 
             // mainChart
             // 
-            chartArea3.AxisX.Interval = 1D;
-            chartArea3.AxisX.IntervalOffset = 1D;
-            chartArea3.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
-            chartArea3.AxisX.LabelStyle.Format = "yyyy-MM-dd";
-            chartArea3.AxisX.Title = "Date";
-            chartArea3.AxisY.Interval = 0.5D;
-            chartArea3.AxisY.Maximum = 44D;
-            chartArea3.AxisY.Minimum = 34D;
-            chartArea3.Name = "ChartArea1";
-            this.mainChart.ChartAreas.Add(chartArea3);
+            chartArea15.AxisX.Interval = 1D;
+            chartArea15.AxisX.IntervalOffset = 1D;
+            chartArea15.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea15.AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chartArea15.AxisX.Title = "Date";
+            chartArea15.AxisY.Interval = 0.5D;
+            chartArea15.AxisY.Maximum = 44D;
+            chartArea15.AxisY.Minimum = 34D;
+            chartArea15.Name = "ChartArea1";
+            this.mainChart.ChartAreas.Add(chartArea15);
             this.mainChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.mainChart.Legends.Add(legend3);
+            legend15.Name = "Legend1";
+            this.mainChart.Legends.Add(legend15);
             this.mainChart.Location = new System.Drawing.Point(0, 241);
             this.mainChart.Name = "mainChart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.mainChart.Series.Add(series3);
+            series15.ChartArea = "ChartArea1";
+            series15.Legend = "Legend1";
+            series15.Name = "Series1";
+            this.mainChart.Series.Add(series15);
             this.mainChart.Size = new System.Drawing.Size(860, 200);
             this.mainChart.TabIndex = 4;
             this.mainChart.Text = "chart1";
@@ -153,13 +159,19 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.beginDateTimePicker);
             this.groupBox2.Controls.Add(this.endDateTimePicker);
             this.groupBox2.Location = new System.Drawing.Point(438, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(185, 76);
+            this.groupBox2.Size = new System.Drawing.Size(315, 76);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Show Data Range";
@@ -312,25 +324,25 @@
             // 
             // mucusChart
             // 
-            chartArea4.AxisX.Interval = 1D;
-            chartArea4.AxisX.IntervalOffset = 1D;
-            chartArea4.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
-            chartArea4.AxisX.LabelStyle.Format = "yyyy-MM-dd";
-            chartArea4.AxisX.Title = "Date";
-            chartArea4.AxisY.Interval = 1D;
-            chartArea4.AxisY.Maximum = 2D;
-            chartArea4.AxisY.Minimum = 0D;
-            chartArea4.Name = "ChartArea1";
-            this.mucusChart.ChartAreas.Add(chartArea4);
+            chartArea16.AxisX.Interval = 1D;
+            chartArea16.AxisX.IntervalOffset = 1D;
+            chartArea16.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea16.AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chartArea16.AxisX.Title = "Date";
+            chartArea16.AxisY.Interval = 1D;
+            chartArea16.AxisY.Maximum = 2D;
+            chartArea16.AxisY.Minimum = 0D;
+            chartArea16.Name = "ChartArea1";
+            this.mucusChart.ChartAreas.Add(chartArea16);
             this.mucusChart.Dock = System.Windows.Forms.DockStyle.Top;
-            legend4.Name = "Legend1";
-            this.mucusChart.Legends.Add(legend4);
+            legend16.Name = "Legend1";
+            this.mucusChart.Legends.Add(legend16);
             this.mucusChart.Location = new System.Drawing.Point(0, 106);
             this.mucusChart.Name = "mucusChart";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.mucusChart.Series.Add(series4);
+            series16.ChartArea = "ChartArea1";
+            series16.Legend = "Legend1";
+            series16.Name = "Series1";
+            this.mucusChart.Series.Add(series16);
             this.mucusChart.Size = new System.Drawing.Size(860, 135);
             this.mucusChart.TabIndex = 6;
             this.mucusChart.Text = "chart1";
@@ -360,6 +372,66 @@
             this.dateToolStripLabel.Name = "dateToolStripLabel";
             this.dateToolStripLabel.Size = new System.Drawing.Size(63, 17);
             this.dateToolStripLabel.Text = "0000-00-00";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(181, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(27, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "<<";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(214, 13);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(27, 23);
+            this.button3.TabIndex = 9;
+            this.button3.Text = ">>";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(214, 42);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(27, 23);
+            this.button4.TabIndex = 11;
+            this.button4.Text = ">>";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(181, 42);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(27, 23);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "<<";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(281, 13);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(27, 52);
+            this.button6.TabIndex = 13;
+            this.button6.Text = ">>";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(248, 13);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(27, 52);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "<<";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
@@ -418,6 +490,12 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateToolStripLabel;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
 

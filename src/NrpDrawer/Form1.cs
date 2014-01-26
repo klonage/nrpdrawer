@@ -170,6 +170,9 @@ namespace NrpDrawer
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(@"Are you sure?", @"Removing item", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                DialogResult.No)
+                return;
             controller.RemoveValue(currentDateTimePicker.Value);
             ReloadData();
             temperatureTextBox.Text = string.Empty;
@@ -238,6 +241,43 @@ namespace NrpDrawer
         {
             mainChartMouseLoc = Point.Empty;
             Refresh();
+        }
+
+        void MovePicker(DateTimePicker picker, bool forward)
+        {
+            picker.Value = picker.Value.AddDays(forward ? 1 : -1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MovePicker(beginDateTimePicker, false);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MovePicker(endDateTimePicker, false);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MovePicker(beginDateTimePicker, false);
+            MovePicker(endDateTimePicker, false);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MovePicker(beginDateTimePicker, true);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MovePicker(endDateTimePicker, true);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MovePicker(beginDateTimePicker, true);
+            MovePicker(endDateTimePicker, true);
         }
     }
 }
