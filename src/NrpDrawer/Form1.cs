@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -10,6 +11,7 @@ namespace NrpDrawer
     {
         private readonly DbController controller = new DbController();
         private bool dbLoaded;
+        private bool transaction;
 
         public Form1()
         {
@@ -87,25 +89,16 @@ namespace NrpDrawer
             var pos = e.Location;
             var results = mainChart.HitTest(pos.X, pos.Y, false,
                                          ChartElementType.PlottingArea);
-            foreach (var result in results)
+            transaction = true;
+            foreach (var xVal in from result in results
+                where result.ChartElementType == ChartElementType.PlottingArea
+                select result.ChartArea.AxisX.PixelPositionToValue(pos.X))
             {
-                if (result.ChartElementType == ChartElementType.PlottingArea)
-                {
-                    var xVal = result.ChartArea.AxisX.PixelPositionToValue(pos.X);
-
-                    currentDateTimePicker.Value = DateTime.FromOADate(xVal);
-
-                    try
-                    {
-                        DbItem item = controller.GetFromCurrentDate(currentDateTimePicker.Value);
-                        temperatureTextBox.Text = item.Temperature.ToString(CultureInfo.InvariantCulture);
-                    }
-                    catch (Exception)
-                    {
-                        temperatureTextBox.Text = String.Empty;
-                    }
-                }
+                currentDateTimePicker.Value = DateTime.FromOADate(xVal);
+                SetCurrentValue();
+                break;
             }
+            transaction = false;
         }
 
         private void updateTemperature_Click(object sender, EventArgs e)
@@ -116,6 +109,15 @@ namespace NrpDrawer
         }
 
         private void currentDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            SetCurrentValue();
+            if (transaction)
+                return;
+            beginDateTimePicker.Value = currentDateTimePicker.Value.AddDays(-40/2);
+            endDateTimePicker.Value = currentDateTimePicker.Value.AddDays(40/2);
+        }
+
+        void SetCurrentValue()
         {
             try
             {
