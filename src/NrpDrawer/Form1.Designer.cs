@@ -31,6 +31,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,19 +48,21 @@
             this.beginDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.baseSymbolsComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.updateTemperature = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.mucusTypeComboBox = new System.Windows.Forms.ComboBox();
             this.temperatureLabel = new System.Windows.Forms.Label();
             this.temperatureTextBox = new System.Windows.Forms.TextBox();
-            this.updateTemperature = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.baseSymbolsComboBox = new System.Windows.Forms.ComboBox();
-            this.mucusTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.mucusChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mucusChart)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -117,13 +122,13 @@
             this.mainChart.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.mainChart.Legends.Add(legend1);
-            this.mainChart.Location = new System.Drawing.Point(0, 106);
+            this.mainChart.Location = new System.Drawing.Point(0, 241);
             this.mainChart.Name = "mainChart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.mainChart.Series.Add(series1);
-            this.mainChart.Size = new System.Drawing.Size(860, 335);
+            this.mainChart.Size = new System.Drawing.Size(860, 200);
             this.mainChart.TabIndex = 4;
             this.mainChart.Text = "chart1";
             this.mainChart.SizeChanged += new System.EventHandler(this.mainChart_SizeChanged);
@@ -205,42 +210,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current item";
             // 
-            // temperatureLabel
-            // 
-            this.temperatureLabel.AutoSize = true;
-            this.temperatureLabel.Location = new System.Drawing.Point(6, 45);
-            this.temperatureLabel.Name = "temperatureLabel";
-            this.temperatureLabel.Size = new System.Drawing.Size(70, 13);
-            this.temperatureLabel.TabIndex = 6;
-            this.temperatureLabel.Text = "Temperature:";
-            // 
-            // temperatureTextBox
-            // 
-            this.temperatureTextBox.Location = new System.Drawing.Point(77, 42);
-            this.temperatureTextBox.Name = "temperatureTextBox";
-            this.temperatureTextBox.Size = new System.Drawing.Size(39, 20);
-            this.temperatureTextBox.TabIndex = 7;
-            // 
-            // updateTemperature
-            // 
-            this.updateTemperature.Location = new System.Drawing.Point(260, 13);
-            this.updateTemperature.Name = "updateTemperature";
-            this.updateTemperature.Size = new System.Drawing.Size(73, 23);
-            this.updateTemperature.TabIndex = 8;
-            this.updateTemperature.Text = "Set/Update";
-            this.updateTemperature.UseVisualStyleBackColor = true;
-            this.updateTemperature.Click += new System.EventHandler(this.updateTemperature_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(339, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Remove";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // baseSymbolsComboBox
             // 
             this.baseSymbolsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -256,6 +225,44 @@
             this.baseSymbolsComboBox.Size = new System.Drawing.Size(63, 21);
             this.baseSymbolsComboBox.TabIndex = 11;
             this.baseSymbolsComboBox.SelectedIndexChanged += new System.EventHandler(this.baseSymbolsComboBox_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(122, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Observation:";
+            // 
+            // updateTemperature
+            // 
+            this.updateTemperature.Location = new System.Drawing.Point(260, 13);
+            this.updateTemperature.Name = "updateTemperature";
+            this.updateTemperature.Size = new System.Drawing.Size(73, 23);
+            this.updateTemperature.TabIndex = 8;
+            this.updateTemperature.Text = "Set/Update";
+            this.updateTemperature.UseVisualStyleBackColor = true;
+            this.updateTemperature.Click += new System.EventHandler(this.updateTemperature_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(264, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Mucus Type:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(339, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(83, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Remove";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // mucusTypeComboBox
             // 
@@ -280,23 +287,46 @@
             this.mucusTypeComboBox.Size = new System.Drawing.Size(83, 21);
             this.mucusTypeComboBox.TabIndex = 12;
             // 
-            // label4
+            // temperatureLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(264, 45);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Mucus Type:";
+            this.temperatureLabel.AutoSize = true;
+            this.temperatureLabel.Location = new System.Drawing.Point(6, 45);
+            this.temperatureLabel.Name = "temperatureLabel";
+            this.temperatureLabel.Size = new System.Drawing.Size(70, 13);
+            this.temperatureLabel.TabIndex = 6;
+            this.temperatureLabel.Text = "Temperature:";
             // 
-            // label5
+            // temperatureTextBox
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(122, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Observation:";
+            this.temperatureTextBox.Location = new System.Drawing.Point(77, 42);
+            this.temperatureTextBox.Name = "temperatureTextBox";
+            this.temperatureTextBox.Size = new System.Drawing.Size(39, 20);
+            this.temperatureTextBox.TabIndex = 7;
+            // 
+            // mucusChart
+            // 
+            chartArea2.AxisX.Interval = 1D;
+            chartArea2.AxisX.IntervalOffset = 1D;
+            chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea2.AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chartArea2.AxisX.Title = "Date";
+            chartArea2.AxisY.Interval = 1D;
+            chartArea2.AxisY.Maximum = 2D;
+            chartArea2.AxisY.Minimum = 0D;
+            chartArea2.Name = "ChartArea1";
+            this.mucusChart.ChartAreas.Add(chartArea2);
+            this.mucusChart.Dock = System.Windows.Forms.DockStyle.Top;
+            legend2.Name = "Legend1";
+            this.mucusChart.Legends.Add(legend2);
+            this.mucusChart.Location = new System.Drawing.Point(0, 106);
+            this.mucusChart.Name = "mucusChart";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.mucusChart.Series.Add(series2);
+            this.mucusChart.Size = new System.Drawing.Size(860, 135);
+            this.mucusChart.TabIndex = 6;
+            this.mucusChart.Text = "chart1";
             // 
             // Form1
             // 
@@ -304,6 +334,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 441);
             this.Controls.Add(this.mainChart);
+            this.Controls.Add(this.mucusChart);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
@@ -317,6 +348,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mucusChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,6 +378,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox mucusTypeComboBox;
+        private System.Windows.Forms.DataVisualization.Charting.Chart mucusChart;
     }
 }
 

@@ -12,7 +12,9 @@ namespace NrpDrawer
         private readonly DbController controller = new DbController();
         private bool dbLoaded;
         private bool transaction;
-
+        private readonly string[] observationMapper = {"Ø", "su", "c", "w", "wl"};
+        private readonly string[] mucusMapper = {"b", "ż", "żt", "gr", "m", "kl", "S", "Bj", "szk", "pł", "mś"};
+         
         public Form1()
         {
             InitializeComponent();
@@ -43,8 +45,8 @@ namespace NrpDrawer
 
         private void beginDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            mainChart.ChartAreas[0].AxisX.Minimum = beginDateTimePicker.Value.ToOADate();
-            mainChart.ChartAreas[0].AxisX.Maximum = endDateTimePicker.Value.ToOADate();
+            mainChart.ChartAreas[0].AxisX.Minimum = mucusChart.ChartAreas[0].AxisX.Minimum = beginDateTimePicker.Value.ToOADate();
+            mainChart.ChartAreas[0].AxisX.Maximum = mucusChart.ChartAreas[0].AxisX.Maximum = endDateTimePicker.Value.ToOADate();
 
             ReloadData();
         }
@@ -55,6 +57,7 @@ namespace NrpDrawer
                 return;
 
             var s = new Series {ChartType = SeriesChartType.Line, Color = Color.DarkRed};
+            var s2 = new Series { ChartType = SeriesChartType.Point, Color = Color.DarkRed };
             DateTime b = beginDateTimePicker.Value,
                 e = endDateTimePicker.Value;
 
@@ -64,7 +67,17 @@ namespace NrpDrawer
                     new DateTime(b.Year, b.Month, b.Day), new DateTime(e.Year, e.Month, e.Day)))
                 {
                     s.Points.AddXY(v.Date, v.Temperature);
+                    int index = s2.Points.AddXY(v.Date, 0.2);
+                    s2.Points[index].Label = "   " + observationMapper[v.Observation];
+
+                    if (v.Observation > 0)
+                    {
+                        index = s2.Points.AddXY(v.Date, 1.2);
+                        s2.Points[index].Label = "   " + mucusMapper[v.MucusType];
+                    }
                 }
+                mucusChart.Series.Clear();
+                mucusChart.Series.Add(s2);
                 mainChart.Series.Clear();
                 mainChart.Series.Add(s);
                 CalculateScale();
