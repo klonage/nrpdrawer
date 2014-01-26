@@ -49,6 +49,10 @@
             this.temperatureTextBox = new System.Windows.Forms.TextBox();
             this.updateTemperature = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.baseSymbolsComboBox = new System.Windows.Forms.ComboBox();
+            this.mucusTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.panel1.SuspendLayout();
@@ -141,7 +145,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.beginDateTimePicker);
             this.groupBox2.Controls.Add(this.endDateTimePicker);
-            this.groupBox2.Location = new System.Drawing.Point(273, 3);
+            this.groupBox2.Location = new System.Drawing.Point(438, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(185, 76);
             this.groupBox2.TabIndex = 10;
@@ -184,15 +188,19 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.baseSymbolsComboBox);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.updateTemperature);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.mucusTypeComboBox);
             this.groupBox1.Controls.Add(this.temperatureLabel);
             this.groupBox1.Controls.Add(this.temperatureTextBox);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.updateTemperature);
             this.groupBox1.Controls.Add(this.currentDateTimePicker);
             this.groupBox1.Location = new System.Drawing.Point(3, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(264, 76);
+            this.groupBox1.Size = new System.Drawing.Size(429, 76);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current item";
@@ -215,7 +223,7 @@
             // 
             // updateTemperature
             // 
-            this.updateTemperature.Location = new System.Drawing.Point(122, 40);
+            this.updateTemperature.Location = new System.Drawing.Point(260, 13);
             this.updateTemperature.Name = "updateTemperature";
             this.updateTemperature.Size = new System.Drawing.Size(73, 23);
             this.updateTemperature.TabIndex = 8;
@@ -225,13 +233,70 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(201, 40);
+            this.button1.Location = new System.Drawing.Point(339, 13);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 23);
+            this.button1.Size = new System.Drawing.Size(83, 23);
             this.button1.TabIndex = 11;
             this.button1.Text = "Remove";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // baseSymbolsComboBox
+            // 
+            this.baseSymbolsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.baseSymbolsComboBox.FormattingEnabled = true;
+            this.baseSymbolsComboBox.Items.AddRange(new object[] {
+            "Ø – nic nie czuję, nic nie widzę",
+            "su – odczucie suchości",
+            "c – stała wydzielina",
+            "w – objaw “wnikliwej obserwacji”",
+            "wl – wilgotność odczuwana na zewnętrznych narządach płciowych"});
+            this.baseSymbolsComboBox.Location = new System.Drawing.Point(195, 42);
+            this.baseSymbolsComboBox.Name = "baseSymbolsComboBox";
+            this.baseSymbolsComboBox.Size = new System.Drawing.Size(63, 21);
+            this.baseSymbolsComboBox.TabIndex = 11;
+            this.baseSymbolsComboBox.SelectedIndexChanged += new System.EventHandler(this.baseSymbolsComboBox_SelectedIndexChanged);
+            // 
+            // mucusTypeComboBox
+            // 
+            this.mucusTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mucusTypeComboBox.FormattingEnabled = true;
+            this.mucusTypeComboBox.Items.AddRange(new object[] {
+            "b – śluz biały, białawy",
+            "ż – śluz żółty",
+            "żt – śluz żółtawy",
+            "gr – śluz grudkowaty",
+            "m – śluz mętny",
+            "kl – śluz kleisty",
+            "S – bliżej nieokreślony śluz gorszej jakości",
+            "Bj – śluz jak surowe białko jaja (rozciągliwy na kilka centymetrów, przejrzysty z" +
+                " ewentualnymi pojedynczymi białymi smugami)",
+            "szk – śluz szklisty (rozciągliwy i przejrzysty jak szkło)",
+            "pł – śluz płynny",
+            "mś – intensywne odczucie “mokro-ślisko”, wrażenie śliskości i naoliwienia w przed" +
+                "sionku pochwy"});
+            this.mucusTypeComboBox.Location = new System.Drawing.Point(339, 42);
+            this.mucusTypeComboBox.Name = "mucusTypeComboBox";
+            this.mucusTypeComboBox.Size = new System.Drawing.Size(83, 21);
+            this.mucusTypeComboBox.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(264, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Mucus Type:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(122, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Observation:";
             // 
             // Form1
             // 
@@ -277,6 +342,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox baseSymbolsComboBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox mucusTypeComboBox;
     }
 }
 

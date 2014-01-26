@@ -60,7 +60,7 @@ namespace NrpDrawer
                 yield return new DbItem(ds.Tables[0].Rows[i]);
         }
 
-        public void InsertValue(double temperature, DateTime date)
+        public void InsertValue(double temperature, DateTime date, int observation, int mucusType)
         {
             bool update = true;
             try
@@ -80,12 +80,12 @@ namespace NrpDrawer
             if (update)
                 cmd.CommandText =
                     "update main_table set temperature = " + temperature.ToString(CultureInfo.InvariantCulture) +
-                    " where insert_date = #" +
+                    ", base_observation = "+observation + ", mucus_type = " + mucusType + " where insert_date = #" +
                     date.ToShortDateString() +
                     "#";
             else
-                cmd.CommandText = "insert into main_table(insert_date, temperature) values(#" + date.ToShortDateString() +
-                                  "#, " + temperature.ToString(CultureInfo.InvariantCulture) + ");";
+                cmd.CommandText = "insert into main_table(insert_date, temperature, base_observation, mucus_type) values(#" + date.ToShortDateString() +
+                                  "#, " + temperature.ToString(CultureInfo.InvariantCulture) + ", " + observation + ", " + mucusType + ");";
 
             if (cmd.ExecuteNonQuery() != 1)
             {

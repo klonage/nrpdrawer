@@ -19,6 +19,9 @@ namespace NrpDrawer
 
             endDateTimePicker.Value = DateTime.Now;
             beginDateTimePicker.Value = DateTime.Now.AddDays(-40);
+
+            baseSymbolsComboBox.SelectedIndex = 0;
+            mucusTypeComboBox.SelectedIndex = 0;
         }
 
         private void openDatabaseFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,8 +60,6 @@ namespace NrpDrawer
 
             try
             {
-                ReloadData();
-
                 foreach (var v in controller.GetFromRangeOfDate(
                     new DateTime(b.Year, b.Month, b.Day), new DateTime(e.Year, e.Month, e.Day)))
                 {
@@ -114,7 +115,7 @@ namespace NrpDrawer
             {
                 // todo replace??? you should use localle settings
                 controller.InsertValue(Double.Parse(temperatureTextBox.Text.Replace('.', ',')),
-                    currentDateTimePicker.Value);
+                    currentDateTimePicker.Value, baseSymbolsComboBox.SelectedIndex, mucusTypeComboBox.SelectedIndex);
                 ReloadData();
             }
             catch (Exception ex)
@@ -138,6 +139,8 @@ namespace NrpDrawer
             {
                 DbItem item = controller.GetFromCurrentDate(currentDateTimePicker.Value);
                 temperatureTextBox.Text = item.Temperature.ToString(CultureInfo.InvariantCulture);
+                baseSymbolsComboBox.SelectedIndex = item.Observation;
+                mucusTypeComboBox.SelectedIndex = item.MucusType;
             }
             catch (Exception)
             {
@@ -150,6 +153,11 @@ namespace NrpDrawer
             controller.RemoveValue(currentDateTimePicker.Value);
             ReloadData();
             temperatureTextBox.Text = string.Empty;
+        }
+
+        private void baseSymbolsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mucusTypeComboBox.Enabled = baseSymbolsComboBox.SelectedIndex != 0;
         }
     }
 }
