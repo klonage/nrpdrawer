@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace NrpDrawer
 {
-    class DbController
+    internal class DbController
     {
         private OleDbConnection connection;
 
@@ -17,9 +19,6 @@ namespace NrpDrawer
             try
             {
                 connection.Open();
-                var da = new OleDbDataAdapter("select * from main_table", connection);
-                var ds = new DataSet();
-                da.Fill(ds);
             }
             catch (Exception ex)
             {
@@ -33,14 +32,66 @@ namespace NrpDrawer
                 connection.Close();
         }
 
-        public void GetFromCurrentDate(DateTime value)
+        public DbItem GetFromCurrentDate(DateTime value)
         {
-            var da = new OleDbDataAdapter("select * from main_table where date = #" + value.ToShortDateString() + "#", connection);
+            var da = new OleDbDataAdapter("select * from main_table where insert_date = #" + value.ToShortDateString() + "#",
+                connection);
+            var ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count != 1)
+                throw new Exception("Unexpected row count in database. Expected 1 but has " + ds.Tables[0].Rows.Count);
+
+            return new DbItem(ds.Tables[0].Rows[0]);
+        }
+
+        public IEnumerable<DbItem> GetFromRangeOfDate(DateTime begin, DateTime end)
+        {
+            var da =
+                new OleDbDataAdapter(
+                    "select * from main_table where insert_date BETWEEN @StartDate AND @EndDate order by insert_date",
+                    connection);
+            da.SelectCommand.Parameters.AddWithValue("@StartDate", begin);
+            da.SelectCommand.Parameters.AddWithValue("@EndDate", end);
+
             var ds = new DataSet();
             da.Fill(ds);
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                MessageBox.Show(ds.Tables[0].Rows[i]["temperature"].ToString());
+                yield return new DbItem(ds.Tables[0].Rows[i]);
+        }
+
+        public void InsertValue(double temperature, DateTime date)
+        {
+            bool update = true;
+            try
+            {
+                GetFromCurrentDate(date);
+            }
+            catch (Exception)
+            {
+                update = false;
+            }
+            var cmd = new OleDbCommand
+            {
+                Connection = connection,
+                CommandType = CommandType.Text
+            };
+
+            if (update)
+                cmd.CommandText =
+                    "update main_table set temperature = " + temperature.ToString(CultureInfo.InvariantCulture) +
+                    " where insert_date = #" +
+                    date.ToShortDateString() +
+                    "#";
+            else
+                cmd.CommandText = "insert into main_table(insert_date, temperature) values(#" + date.ToShortDateString() +
+                                  "#, " + temperature.ToString(CultureInfo.InvariantCulture) + ");";
+
+            if (cmd.ExecuteNonQuery() != 1)
+            {
+                throw new Exception("Cannot " + (update ? "update" : "insert") + " value");
+            }
         }
     }
 }

@@ -28,14 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dbOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.showSpecyficDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.currentDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.showSpecificButton = new System.Windows.Forms.Button();
+            this.mainChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.beginDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.temperatureLabel = new System.Windows.Forms.Label();
+            this.temperatureTextBox = new System.Windows.Forms.TextBox();
+            this.updateTemperature = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.mainMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -44,7 +61,7 @@
             this.fileToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(453, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(860, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -63,46 +80,166 @@
             this.openDatabaseFileToolStripMenuItem.Text = "Open Database File...";
             this.openDatabaseFileToolStripMenuItem.Click += new System.EventHandler(this.openDatabaseFileToolStripMenuItem_Click);
             // 
-            // showSpecyficDateTimePicker
+            // currentDateTimePicker
             // 
-            this.showSpecyficDateTimePicker.Location = new System.Drawing.Point(36, 24);
-            this.showSpecyficDateTimePicker.Name = "showSpecyficDateTimePicker";
-            this.showSpecyficDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.showSpecyficDateTimePicker.TabIndex = 1;
+            this.currentDateTimePicker.Location = new System.Drawing.Point(45, 16);
+            this.currentDateTimePicker.Name = "currentDateTimePicker";
+            this.currentDateTimePicker.Size = new System.Drawing.Size(152, 20);
+            this.currentDateTimePicker.TabIndex = 1;
+            this.currentDateTimePicker.ValueChanged += new System.EventHandler(this.currentDateTimePicker_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-3, 24);
+            this.label1.Location = new System.Drawing.Point(6, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Date:";
             // 
-            // showSpecificButton
+            // mainChart
             // 
-            this.showSpecificButton.Location = new System.Drawing.Point(242, 24);
-            this.showSpecificButton.Name = "showSpecificButton";
-            this.showSpecificButton.Size = new System.Drawing.Size(75, 23);
-            this.showSpecificButton.TabIndex = 3;
-            this.showSpecificButton.Text = "Show";
-            this.showSpecificButton.UseVisualStyleBackColor = true;
-            this.showSpecificButton.Click += new System.EventHandler(this.showSpecificButton_Click);
+            chartArea1.AxisX.Interval = 1D;
+            chartArea1.AxisX.IntervalOffset = 1D;
+            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea1.AxisX.LabelStyle.Format = "yyyy-MM-dd";
+            chartArea1.AxisX.Title = "Date";
+            chartArea1.AxisY.Interval = 0.5D;
+            chartArea1.AxisY.Maximum = 44D;
+            chartArea1.AxisY.Minimum = 34D;
+            chartArea1.Name = "ChartArea1";
+            this.mainChart.ChartAreas.Add(chartArea1);
+            this.mainChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.mainChart.Legends.Add(legend1);
+            this.mainChart.Location = new System.Drawing.Point(0, 106);
+            this.mainChart.Name = "mainChart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.mainChart.Series.Add(series1);
+            this.mainChart.Size = new System.Drawing.Size(860, 335);
+            this.mainChart.TabIndex = 4;
+            this.mainChart.Text = "chart1";
+            this.mainChart.SizeChanged += new System.EventHandler(this.mainChart_SizeChanged);
+            this.mainChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mainChart_MouseClick);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(860, 82);
+            this.panel1.TabIndex = 5;
+            // 
+            // endDateTimePicker
+            // 
+            this.endDateTimePicker.Location = new System.Drawing.Point(45, 42);
+            this.endDateTimePicker.Name = "endDateTimePicker";
+            this.endDateTimePicker.Size = new System.Drawing.Size(130, 20);
+            this.endDateTimePicker.TabIndex = 5;
+            this.endDateTimePicker.ValueChanged += new System.EventHandler(this.beginDateTimePicker_ValueChanged);
+            // 
+            // beginDateTimePicker
+            // 
+            this.beginDateTimePicker.Location = new System.Drawing.Point(45, 16);
+            this.beginDateTimePicker.Name = "beginDateTimePicker";
+            this.beginDateTimePicker.Size = new System.Drawing.Size(130, 20);
+            this.beginDateTimePicker.TabIndex = 4;
+            this.beginDateTimePicker.ValueChanged += new System.EventHandler(this.beginDateTimePicker_ValueChanged);
+            // 
+            // temperatureLabel
+            // 
+            this.temperatureLabel.AutoSize = true;
+            this.temperatureLabel.Location = new System.Drawing.Point(6, 45);
+            this.temperatureLabel.Name = "temperatureLabel";
+            this.temperatureLabel.Size = new System.Drawing.Size(70, 13);
+            this.temperatureLabel.TabIndex = 6;
+            this.temperatureLabel.Text = "Temperature:";
+            // 
+            // temperatureTextBox
+            // 
+            this.temperatureTextBox.Location = new System.Drawing.Point(77, 42);
+            this.temperatureTextBox.Name = "temperatureTextBox";
+            this.temperatureTextBox.Size = new System.Drawing.Size(39, 20);
+            this.temperatureTextBox.TabIndex = 7;
+            // 
+            // updateTemperature
+            // 
+            this.updateTemperature.Location = new System.Drawing.Point(122, 40);
+            this.updateTemperature.Name = "updateTemperature";
+            this.updateTemperature.Size = new System.Drawing.Size(75, 23);
+            this.updateTemperature.TabIndex = 8;
+            this.updateTemperature.Text = "Set/Update";
+            this.updateTemperature.UseVisualStyleBackColor = true;
+            this.updateTemperature.Click += new System.EventHandler(this.updateTemperature_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.temperatureLabel);
+            this.groupBox1.Controls.Add(this.temperatureTextBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.updateTemperature);
+            this.groupBox1.Controls.Add(this.currentDateTimePicker);
+            this.groupBox1.Location = new System.Drawing.Point(3, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(207, 76);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Current item";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.beginDateTimePicker);
+            this.groupBox2.Controls.Add(this.endDateTimePicker);
+            this.groupBox2.Location = new System.Drawing.Point(216, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(185, 76);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Show Data Range";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "From:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "To:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 328);
-            this.Controls.Add(this.showSpecificButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.showSpecyficDateTimePicker);
+            this.ClientSize = new System.Drawing.Size(860, 441);
+            this.Controls.Add(this.mainChart);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainChart)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,9 +251,19 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDatabaseFileToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog dbOpenFileDialog;
-        private System.Windows.Forms.DateTimePicker showSpecyficDateTimePicker;
+        private System.Windows.Forms.DateTimePicker currentDateTimePicker;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button showSpecificButton;
+        private System.Windows.Forms.DataVisualization.Charting.Chart mainChart;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DateTimePicker endDateTimePicker;
+        private System.Windows.Forms.DateTimePicker beginDateTimePicker;
+        private System.Windows.Forms.Button updateTemperature;
+        private System.Windows.Forms.TextBox temperatureTextBox;
+        private System.Windows.Forms.Label temperatureLabel;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
