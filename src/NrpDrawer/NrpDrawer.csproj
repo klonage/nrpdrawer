@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbController.cs" />
+    <Compile Include="DbCycle.cs" />
     <Compile Include="DbItem.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

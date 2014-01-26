@@ -16,6 +16,7 @@ namespace NrpDrawer
         private readonly string[] mucusMapper = {"b", "ż", "żt", "gr", "m", "kl", "S", "Bj", "szk", "pł", "mś"};
         private Point mainChartMouseLoc = Point.Empty;
         private Point mucusChartMouseLoc = Point.Empty;
+        private const string NullDate = @"0000-00-00";
 
         public Form1()
         {
@@ -78,9 +79,25 @@ namespace NrpDrawer
                         s2.Points[index].Label = "   " + mucusMapper[v.MucusType];
                     }
                 }
+
+                mainChart.Series.Clear();
+
+                foreach (var v in controller.GetCyclesFromRangeOfDate(
+                    new DateTime(b.Year, b.Month, b.Day), new DateTime(e.Year, e.Month, e.Day)))
+                {
+                    var s1 = new Series { ChartType = SeriesChartType.Line, Color = Color.Green, BorderWidth = 3 };
+                    s1.Points.AddXY(v.BeginDate, 34);
+                    s1.Points.AddXY(v.BeginDate, 44);
+                    mainChart.Series.Add(s1);
+                    if (v.Affected) continue;
+                    var s3 = new Series {ChartType = SeriesChartType.Line, Color = Color.LawnGreen, BorderWidth = 3};
+                    s3.Points.AddXY(v.EndDate, 34);
+                    s3.Points.AddXY(v.EndDate, 44);
+                    mainChart.Series.Add(s3);
+                }
+
                 mucusChart.Series.Clear();
                 mucusChart.Series.Add(s2);
-                mainChart.Series.Clear();
                 mainChart.Series.Add(s);
                 CalculateScale();
             }
@@ -278,6 +295,56 @@ namespace NrpDrawer
         {
             MovePicker(beginDateTimePicker, true);
             MovePicker(endDateTimePicker, true);
+        }
+
+        private void UpdateCycleLabels(DbCycle cycle)
+        {
+            if (cycle == null)
+                return;
+            beginCycleLabel.Text = cycle.BeginDate.ToShortDateString();
+            endCycleLabel.Text = cycle.EndDate.ToShortDateString();
+           // cycleDateTimePicker.Value = cycle.BeginDate.AddDays((cycle.EndDate - cycle.BeginDate).Days/2.0);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateCycleLabels(controller.FindCycleByDate(cycleDateTimePicker.Value));
+            }
+            catch (Exception)
+            {
+                beginCycleLabel.Text = endCycleLabel.Text = NullDate;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateCycleLabels(controller.GetPreviousCycle(cycleDateTimePicker.Value, beginCycleLabel.Text == NullDate));
+            }
+            catch (Exception)
+            {
+                beginCycleLabel.Text = endCycleLabel.Text = NullDate;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateCycleLabels(controller.GetNextCycle(cycleDateTimePicker.Value, beginCycleLabel.Text == NullDate));
+            }
+            catch (Exception)
+            {
+                beginCycleLabel.Text = endCycleLabel.Text = NullDate;
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            controller.StartNewCycle(DateTime.Now);
         }
     }
 }
